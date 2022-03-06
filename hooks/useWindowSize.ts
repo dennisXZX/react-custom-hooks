@@ -1,10 +1,15 @@
-import {useEffect} from 'react';
+import {useEffect, useState} from 'react';
+
+interface WindowSize {
+    width: number,
+    height: number
+}
 
 export const useWindowSize = () => {
     // Check if we are doing server side rendering
     const isSSR = typeof window === 'undefined';
 
-    const [windowSize, setWindowSize] = React.useState({
+    const [windowSize, setWindowSize] = useState<WindowSize>({
         width: isSSR ? 1200 : window.innerWidth,
         height: isSSR ? 800 : window.innerHeight,
     });

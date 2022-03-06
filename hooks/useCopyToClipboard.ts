@@ -1,10 +1,13 @@
 import { useEffect, useCallback, useState } from 'react';
 import copy from 'copy-to-clipboard';
 
-export const useCopyToClipboard = (resetInterval = null) => {
+type UseCopyToClipboardReturn = [boolean, (text: string) => void];
+
+export const useCopyToClipboard = (resetInterval: number = null): UseCopyToClipboardReturn => {
     const [isCopied, setIsCopied] = useState(false);
 
-    const handleCopy = useCallback((text) => {
+    // Wrap it in useCallback to prevent creating the function on every re-rendering
+    const handleCopy = useCallback((text): void => {
         if (typeof text === 'string' || typeof text === 'number') {
             copy(text.toString());
             setIsCopied(true);
@@ -18,7 +21,7 @@ export const useCopyToClipboard = (resetInterval = null) => {
 
     // Reset the `isCopied` state after passing a time interval
     useEffect(() => {
-        let timeoutId;
+        let timeoutId: number;
 
         if (isCopied && resetInterval) {
             timeoutId = setTimeout(() => setIsCopied(false), resetInterval);
