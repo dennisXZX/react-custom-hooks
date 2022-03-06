@@ -1,7 +1,7 @@
-import React, { useEffect, useCallback } from "react";
-import copy from "copy-to-clipboard";
+import { useEffect, useCallback, useState } from 'react';
+import copy from 'copy-to-clipboard';
 
-export default function useCopyToClipboard(resetInterval = null) {
+export const useCopyToClipboard = (resetInterval = null) => {
     const [isCopied, setIsCopied] = useState(false);
 
     const handleCopy = useCallback((text) => {
@@ -16,15 +16,16 @@ export default function useCopyToClipboard(resetInterval = null) {
         }
     }, [])
 
+    // Reset the `isCopied` state after passing a time interval
     useEffect(() => {
-        let timeout;
+        let timeoutId;
 
         if (isCopied && resetInterval) {
-            timeout = setTimeout(() => setIsCopied(false), resetInterval);
+            timeoutId = setTimeout(() => setIsCopied(false), resetInterval);
         }
 
         return () => {
-            clearTimeout(timeout);
+            clearTimeout(timeoutId);
         };
     }, [isCopied, resetInterval]);
 
@@ -33,11 +34,6 @@ export default function useCopyToClipboard(resetInterval = null) {
 
 /**
  * useCopyToClipboard() Usage
- *
- * import React from "react";
- * import ClipboardIcon from "../svg/ClipboardIcon";
- * import SuccessIcon from "../svg/SuccessIcon";
- * import useCopyToClipboard from "../utils/useCopyToClipboard";
  *
  * function CopyButton({ code }) {
  *   // isCopied is reset after 3 second timeout
