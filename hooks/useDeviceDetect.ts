@@ -15,3 +15,9 @@ export const useDeviceDetect = (): boolean => {
 
     return isMobile;
 }
+
+/**
+ * useDeviceDetect() Usage
+ *
+ * const isMobile = useDeviceDetect();
+ */
