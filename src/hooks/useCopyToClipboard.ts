@@ -9,7 +9,7 @@ export const useCopyToClipboard = (
   const [isCopied, setIsCopied] = useState(false);
 
   // Wrap it in useCallback to prevent creating the function on every re-rendering
-  const handleCopy = useCallback((text): void => {
+  const handleCopy = useCallback((text: string | number): void => {
     if (typeof text === "string" || typeof text === "number") {
       copy(text.toString());
       setIsCopied(true);

@@ -4,14 +4,9 @@
     "allowJs": true,
     "target": "es5",
     "esModuleInterop": true,
-    "lib": [
-      "ES2015",
-      "DOM"
-    ],
+    "lib": ["ES2015", "DOM"],
     "module": "esnext",
     "moduleResolution": "node"
   },
-  "include": [
-    "./src/**/*"
-  ]
+  "include": ["./src/**/*"]
 }

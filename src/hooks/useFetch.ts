@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 
-export const FETCH_STATUS = {
-  IDLE: "IDLE",
-  FETCHING: "FETCHING",
-  FETCHED: "FETCHED",
-};
+export enum FETCH_STATUS {
+  IDLE = "IDLE",
+  FETCHING = "FETCHING",
+  FETCHED = "FETCHED",
+}
 
-export const useFetch = (url) => {
+export const useFetch = (url: string) => {
   const [status, setStatus] = useState(FETCH_STATUS.IDLE);
   const [data, setData] = useState([]);
 
