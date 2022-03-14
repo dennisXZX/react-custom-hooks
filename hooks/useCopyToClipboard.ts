@@ -1,39 +1,41 @@
-import { useEffect, useCallback, useState } from 'react';
-import copy from 'copy-to-clipboard';
+import { useEffect, useCallback, useState } from "react";
+import copy from "copy-to-clipboard";
 
 type UseCopyToClipboardReturn = [boolean, (text: string) => void];
 
-export const useCopyToClipboard = (resetInterval: number = null): UseCopyToClipboardReturn => {
-    const [isCopied, setIsCopied] = useState(false);
+export const useCopyToClipboard = (
+  resetInterval: number = null
+): UseCopyToClipboardReturn => {
+  const [isCopied, setIsCopied] = useState(false);
 
-    // Wrap it in useCallback to prevent creating the function on every re-rendering
-    const handleCopy = useCallback((text): void => {
-        if (typeof text === 'string' || typeof text === 'number') {
-            copy(text.toString());
-            setIsCopied(true);
-        } else {
-            console.error(
-                `Cannot copy typeof ${typeof text} to clipboard, must be a string or number.`
-            );
-            setIsCopied(false);
-        }
-    }, [])
+  // Wrap it in useCallback to prevent creating the function on every re-rendering
+  const handleCopy = useCallback((text): void => {
+    if (typeof text === "string" || typeof text === "number") {
+      copy(text.toString());
+      setIsCopied(true);
+    } else {
+      console.error(
+        `Cannot copy typeof ${typeof text} to clipboard, must be a string or number.`
+      );
+      setIsCopied(false);
+    }
+  }, []);
 
-    // Reset the `isCopied` state after passing a time interval
-    useEffect(() => {
-        let timeoutId: number;
+  // Reset the `isCopied` state after passing a time interval
+  useEffect(() => {
+    let timeoutId: number;
 
-        if (isCopied && resetInterval) {
-            timeoutId = setTimeout(() => setIsCopied(false), resetInterval);
-        }
+    if (isCopied && resetInterval) {
+      timeoutId = setTimeout(() => setIsCopied(false), resetInterval);
+    }
 
-        return () => {
-            clearTimeout(timeoutId);
-        };
-    }, [isCopied, resetInterval]);
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, [isCopied, resetInterval]);
 
-    return [isCopied, handleCopy];
-}
+  return [isCopied, handleCopy];
+};
 
 /**
  * useCopyToClipboard() Usage
