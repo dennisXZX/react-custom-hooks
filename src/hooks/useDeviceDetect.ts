@@ -4,6 +4,10 @@ import { isSSR } from "../misc/util";
 const MobileDeviceDetectionRegex =
   /Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i;
 
+/**
+ * Hook to detect whether a user is on a mobile
+ * @returns {boolean} - whether user is on a mobile
+ */
 export const useDeviceDetect = (): boolean => {
   const [isMobile, setIsMobile] = useState(false);
 

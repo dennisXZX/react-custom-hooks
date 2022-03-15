@@ -32,5 +32,8 @@ export const useFetch = (url: string) => {
 /**
  * useFetch() Usage
  *
- * const isMobile = useFetch();
+ * const [query, setQuery] = useState('');
+ *
+ * const url = query && `https://hn.algolia.com/api/v1/search?query=${query}`;
+ * const { status, data } = useFetch(url);
  */

@@ -1,8 +1,13 @@
 import { useEffect, useCallback, useState } from "react";
 import copy from "copy-to-clipboard";
 
-type UseCopyToClipboardReturn = [boolean, (text: string) => void];
+type UseCopyToClipboardReturn = [boolean, (text: string | number) => void];
 
+/**
+ * Hooks to copy text or number to clipboard
+ * @param {number} resetInterval - the interval of resetting the `isCopied` state
+ * @returns {UseCopyToClipboardReturn} - an array containing `isCopied` state and a function to copy text
+ */
 export const useCopyToClipboard = (
   resetInterval: number = null
 ): UseCopyToClipboardReturn => {
